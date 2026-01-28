@@ -186,7 +186,7 @@ body {
   color: #f4f4f5; /* light text */
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
   display: flex;
-  flex-direction:
+  flex-direction:column;
 }
 
 .post-card-image {
