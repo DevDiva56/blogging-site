@@ -23,7 +23,7 @@ function Login() {
     }
     }
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto" }}>
+    <div className="form-container">
       <h2>Login</h2>
 
        <form onSubmit={handleSubmit}>

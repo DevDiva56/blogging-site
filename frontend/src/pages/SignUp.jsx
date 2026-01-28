@@ -28,8 +28,8 @@ function Signup() {
   }
 
   return (
-    <div style={{ maxWidth: "400px", margin: "50px auto" }}>
-      <h2>Signup</h2>
+      <div className="form-container">
+      <h2>Hello, Ready to Experience Archie</h2>
 
       <form onSubmit={handleSubmit}>
         <input
