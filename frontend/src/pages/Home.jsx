@@ -38,7 +38,11 @@ function Home() {
                 {post.subtitle && <h4>{post.subtitle}</h4>}
                 <p>{post.content.substring(0, 150)}...</p>
                 <p><strong>Author:</strong> {post.author?.username || "Unknown"}</p>
+                <div className="card-actions">
+                    <button className="btn-edit">Edit</button>
+                    <button className="btn-delete">Delete</button>
                 <Link to={`/post/${post._id}`}>Read more</Link>
+                </div>
               </div>
             </div>
           ))}

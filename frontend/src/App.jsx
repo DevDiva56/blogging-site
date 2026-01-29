@@ -6,17 +6,25 @@ import Home from "./pages/Home"
 import CreatePost from "./pages/CreatePost"
 import ViewPost from "./pages/ViewPost"
 import EditPost from "./pages/EditPost"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 
 function App(){
 
   return (
-
+     <div className="app-container">
     <Router>
         <NavBar />
       <div className="main-content">
       <Routes>
-        <Route path ="/"element ={<Home/>}/>
+          <Route
+    path="/"
+    element={
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+    }
+  />
         <Route path="/signup" element={<Signup />} /> 
         <Route path ="/login"element ={<Login/>}/>
         <Route path ="/create"element ={<CreatePost/>}/>
@@ -25,6 +33,7 @@ function App(){
       </Routes>
       </div>
     </Router>
+    </div>
   )
 }
 
