@@ -4,7 +4,7 @@ import Signup from "./pages/Signup"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import CreatePost from "./pages/CreatePost"
-import ViewPost from "./pages/ViewPost"
+import ViewPost from  "./pages/ViewPost"
 import EditPost from "./pages/EditPost"
 import ProtectedRoute from "./components/ProtectedRoute"
 

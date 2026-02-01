@@ -45,6 +45,62 @@ router.post("/", auth, upload.single("image"), async (req, res) =>  {
   }
 })
 
+// LIKE / UNLIKE POST
+router.post("/:id/like", auth, async (req, res) => {
+  try {
+    const post = await BlogPost.findById(req.params.id);
+    if (!post) return res.status(404).json({ message: "Post not found" });
+
+    const userId = req.user.id;
+
+    const alreadyLiked = post.likes.includes(userId);
+
+    if (alreadyLiked) {
+      post.likes = post.likes.filter(
+        (id) => id.toString() !== userId
+      );
+    } else {
+      post.likes.push(userId);
+    }
+
+    await post.save();
+
+    res.json({
+      likesCount: post.likes.length,
+      liked: !alreadyLiked,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to like post" });
+  }
+});
+
+// ADD COMMENT
+router.post("/:id/comment", auth, async (req, res) => {
+  try {
+    const { text } = req.body;
+
+    if (!text) {
+      return res.status(400).json({ message: "Comment cannot be empty" });
+    }
+
+    const post = await BlogPost.findById(req.params.id);
+    if (!post) return res.status(404).json({ message: "Post not found" });
+
+    post.comments.push({
+      user: req.user.id,
+      text,
+    });
+
+    await post.save();
+
+    await post.populate("comments.user", "username");
+
+    res.status(201).json(post.comments);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to add comment" });
+  }
+});
+
 // Updating a post
 router.put("/:id", auth, upload.single("image"), async (req, res) => {
   try {
