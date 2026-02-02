@@ -64,40 +64,17 @@ function Home() {
                 />
               )}
 
-              <div className="post-card-content">
+                 <div className="post-card-content">
                 <h3>{post.title}</h3>
                 {post.subtitle && <h4>{post.subtitle}</h4>}
                 <p>{post.content.substring(0, 150)}...</p>
 
                 <p>
-                  <strong>Author:</strong>{" "}
-                  {post.author?.username || "Unknown"}
+                  <strong>Author:</strong> {post.author?.username || "Unknown"}
                 </p>
 
                 <div className="card-actions">
-                  {isAuthor ? (
-                    <>
-                      <button
-                        className="btn-edit"
-                        onClick={() => navigate(`/edit/${post._id}`)}
-                      >
-                        Edit
-                      </button>
-
-                      <button
-                        className="btn-delete"
-                        onClick={() => handleDelete(post._id)}
-                      >
-                        Delete
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button className="btn-like">❤️ Like</button>
-                      <button className="btn-comment">💬 Comment</button>
-                    </>
-                  )}
-
+                  {/* Only "Read more" link for now */}
                   <Link to={`/post/${post._id}`} className="read-more">
                     Read more →
                   </Link>
@@ -110,5 +87,4 @@ function Home() {
     </div>
   );
 }
-
 export default Home;

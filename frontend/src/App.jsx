@@ -5,8 +5,10 @@ import Login from "./pages/Login"
 import Home from "./pages/Home"
 import CreatePost from "./pages/CreatePost"
 import ViewPost from  "./pages/ViewPost"
+import ViewPostsList from "./pages/ViewPostList"
 import EditPost from "./pages/EditPost"
 import ProtectedRoute from "./components/ProtectedRoute"
+
 
 
 function App(){
@@ -28,7 +30,8 @@ function App(){
         <Route path="/signup" element={<Signup />} /> 
         <Route path ="/login"element ={<Login/>}/>
         <Route path ="/create"element ={<CreatePost/>}/>
-        <Route path ="/post/:id"element ={<ViewPost/>}/>
+        <Route path="/view" element={<ViewPostsList />} />   
+        <Route path="/post/:id" element={<ViewPost />} /> 
         <Route path="/edit/:id" element={<EditPost />} />
       </Routes>
       </div>

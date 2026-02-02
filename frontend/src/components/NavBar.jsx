@@ -1,17 +1,16 @@
-import { Link, useNavigate, useLocation } from "react-router-dom"
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 function NavBar() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const token = localStorage.getItem("token")
+  const navigate = useNavigate();
+  const location = useLocation();
+  const token = localStorage.getItem("token");
 
   const handleLogout = () => {
-    localStorage.removeItem("token")
-    navigate("/login")
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
-  const isActive = (path) =>
-    location.pathname === path ? "active" : "";
+  const isActive = (path) => (location.pathname === path ? "active" : "");
 
   return (
     <div className="sidebar">
@@ -20,14 +19,16 @@ function NavBar() {
       <Link to="/" className={isActive("/")}>Home</Link>
 
       {token && (
-        <Link to="/create" className={isActive("/create")}>
-          Create Post
-        </Link>
-      )}
+        <>
+          <Link to="/create" className={isActive("/create")}>
+            Create Post
+          </Link>
 
-       <Link to="/view" className={isActive("/view")}>
-          View Post
-        </Link>
+          <Link to="/view" className={isActive("/view")}>
+            View Post
+          </Link>
+        </>
+      )}
 
       {!token ? (
         <>
@@ -40,7 +41,7 @@ function NavBar() {
         </button>
       )}
     </div>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

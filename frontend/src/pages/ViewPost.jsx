@@ -101,48 +101,49 @@ function ViewPost() {
         <strong>Author:</strong> {post.author?.username || "Unknown"}
       </p>
 
-      <div className="card-actions">
-        <button onClick={handleLike}>
+       <div className="post-actions">
+        <button className="like-btn" onClick={handleLike}>
           {liked ? "💔 Unlike" : "❤️ Like"} ({likesCount})
         </button>
 
         {isAuthor && (
           <>
-            <button onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+            <button className="edit-btn" onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
+            <button className="delete-btn" onClick={handleDelete}>Delete</button>
           </>
         )}
       </div>
 
-      <hr />
+      <div className="comment-section">
+        <h3>Comments</h3>
+        {comments.length === 0 ? (
+          <p className="no-comments">No comments yet.</p>
+        ) : (
+          comments.map((comment, index) => (
+            <div key={index} className="comment">
+              <strong className="comment-user">{comment.user?.username || "Anonymous"}</strong>
+              <p className="comment-text">{comment.text}</p>
+            </div>
+          ))
+        )}
 
-      <h3>Comments</h3>
-      {comments.length === 0 ? (
-        <p>No comments yet.</p>
-      ) : (
-        comments.map((comment, index) => (
-          <div key={index} className="comment">
-            <strong>{comment.user?.username || "Anonymous"}</strong>
-            <p>{comment.text}</p>
-          </div>
-        ))
-      )}
-
-      {token && (
-        <form onSubmit={handleCommentSubmit}>
-          <textarea
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            placeholder="Write a comment..."
-            required
-          />
-          <button type="submit">Post Comment</button>
-        </form>
-      )}
-
-      <Link to="/">← Back to Home</Link>
+        {token && (
+          <form className="comment-form" onSubmit={handleCommentSubmit}>
+            <textarea
+              className="comment-input"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder="Write a comment..."
+              required
+            />
+            <button className="comment-btn" type="submit">Post Comment</button>
+          </form>
+        )
+        }
+      </div>
+      <Link to="/" className="back-link">← Back to Home</Link>
     </div>
   );
 }
 
-export default ViewPost;
+export default ViewPost
