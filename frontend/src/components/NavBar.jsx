@@ -25,7 +25,7 @@ function NavBar() {
           </Link>
 
           <Link to="/view" className={isActive("/view")}>
-            View Post
+            Explore
           </Link>
         </>
       )}

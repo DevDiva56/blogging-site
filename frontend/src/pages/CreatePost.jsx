@@ -57,6 +57,7 @@ function CreatePost() {
       <div className="form-container">
       <h2>Create New Post</h2>
       <form onSubmit={handleSubmit}>
+        
         <input
           type="text"
           placeholder="Title"
@@ -79,13 +80,23 @@ function CreatePost() {
           required
         />
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
+        <div className="image-field">
+  <label>Post Image</label>
+  <input
+    type="file"
+    accept="image/*"
+    onChange={handleImageChange}
+  />
 
-        {preview && <img src={preview} alt="Preview" />}
+  {preview && (
+    <img
+      src={preview}
+      alt="Preview"
+      className="image-preview"
+    />
+  )}
+</div>
+
 
         <button type="submit">Create Post</button>
       </form>

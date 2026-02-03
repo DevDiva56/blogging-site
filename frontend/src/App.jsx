@@ -8,8 +8,8 @@ import ViewPost from  "./pages/ViewPost"
 import ViewPostsList from "./pages/ViewPostList"
 import EditPost from "./pages/EditPost"
 import ProtectedRoute from "./components/ProtectedRoute"
-
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App(){
 

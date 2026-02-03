@@ -22,7 +22,7 @@ function ViewPostsList() {
 
   return (
     <div className="home-container">
-      <h2>All Posts</h2>
+      <h2>Explore</h2>
       <div className="posts-grid">
         {posts.map((post) => (
           <div key={post._id} className="post-card">

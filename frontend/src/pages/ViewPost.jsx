@@ -19,7 +19,7 @@ function ViewPost() {
 
   // Helper for authenticated requests
   const authRequest = (config = {}) => {
-    if (!token) throw new Error("No token found. Please login.");
+    if (!token) return toast.info("No token found. Please login.");
     return { ...config, headers: { ...config.headers, Authorization: `Bearer ${token}` } };
   };
 
@@ -30,7 +30,7 @@ function ViewPost() {
         const res = await API.get(`/posts/${id}`);
         setPost(res.data);
       } catch (err) {
-        alert(err.response?.data?.message || "Failed to fetch post");
+        toast.error(err.response?.data?.message || "Failed to fetch post");
       }
     };
     fetchPost();
@@ -48,27 +48,27 @@ function ViewPost() {
   // Like / Unlike
   const handleLike = async () => {
     try {
-      if (!token) return alert("Please login to like");
+      if (!token) return toast.info("Please login to like");
       const res = await API.post(`/posts/${id}/like`, {}, authRequest());
       setLiked(res.data.liked);
       setLikesCount(res.data.likesCount);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Failed to like post");
+       toast.error(err.response?.data?.message || "Failed to like post");
     }
   };
 
   // Submit comment
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (!commentText.trim()) return; // prevent empty comments
+    if (!commentText.trim()) return;
     try {
       const res = await API.post(`/posts/${id}/comment`, { text: commentText }, authRequest());
       setComments(res.data);
       setCommentText("");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Failed to add comment");
+       toast.error(err.response?.data?.message || "Failed to add comment");
     }
   };
 
@@ -80,7 +80,7 @@ function ViewPost() {
       navigate("/");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Failed to delete post");
+       toast.error(err.response?.data?.message || "Failed to delete post");
     }
   };
 
@@ -89,61 +89,62 @@ function ViewPost() {
   const isAuthor = currentUserId === post.author?._id;
 
   return (
-    <div className="post-detail">
-      <h2>{post.title}</h2>
-      {post.subtitle && <h4>{post.subtitle}</h4>}
+  <div className="post-detail">
+    <h2>{post.title}</h2>
+    {post.subtitle && <h4>{post.subtitle}</h4>}
 
-      {post.imageUrl && <img src={post.imageUrl} alt={post.title} />}
+    {post.imageUrl && <img src={post.imageUrl} alt={post.title} />}
 
-      <p>{post.content}</p>
+    <p>{post.content}</p>
 
-      <p>
-        <strong>Author:</strong> {post.author?.username || "Unknown"}
-      </p>
+    <p>
+      <strong>Author:</strong> {post.author?.username || "Unknown"}
+    </p>
 
-       <div className="post-actions">
-        <button className="like-btn" onClick={handleLike}>
-          {liked ? "💔 Unlike" : "❤️ Like"} ({likesCount})
-        </button>
+    <div className="post-actions">
+      <button className="like-btn" onClick={handleLike}>
+        {liked ? "💔 Unlike" : "❤️ Like"} ({likesCount})
+      </button>
 
-        {isAuthor && (
-          <>
-            <button className="edit-btn" onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
-            <button className="delete-btn" onClick={handleDelete}>Delete</button>
-          </>
-        )}
-      </div>
-
-      <div className="comment-section">
-        <h3>Comments</h3>
-        {comments.length === 0 ? (
-          <p className="no-comments">No comments yet.</p>
-        ) : (
-          comments.map((comment, index) => (
-            <div key={index} className="comment">
-              <strong className="comment-user">{comment.user?.username || "Anonymous"}</strong>
-              <p className="comment-text">{comment.text}</p>
-            </div>
-          ))
-        )}
-
-        {token && (
-          <form className="comment-form" onSubmit={handleCommentSubmit}>
-            <textarea
-              className="comment-input"
-              value={commentText}
-              onChange={(e) => setCommentText(e.target.value)}
-              placeholder="Write a comment..."
-              required
-            />
-            <button className="comment-btn" type="submit">Post Comment</button>
-          </form>
-        )
-        }
-      </div>
-      <Link to="/" className="back-link">← Back to Home</Link>
+      {isAuthor && (
+        <>
+          <button className="edit-btn" onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
+          <button className="delete-btn" onClick={handleDelete}>Delete</button>
+        </>
+      )}
     </div>
-  );
-}
 
+    <div className="comment-section">
+      <h3>Comments</h3>
+      {comments.length === 0 ? (
+        <p className="no-comments">No comments yet.</p>
+      ) : (
+        comments.map((comment, index) => (
+          <div key={index} className="comment">
+            <strong className="comment-user">{comment.user?.username || "Anonymous"}</strong>
+            <p className="comment-text">{comment.text}</p>
+          </div>
+        ))
+      )}
+
+      {token && (
+        <form className="comment-form" onSubmit={handleCommentSubmit}>
+          <textarea
+            className="comment-input"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            placeholder="Write a comment..."
+            required
+          />
+          <button className="comment-btn" type="submit">Post Comment</button>
+        </form>
+      )}
+    </div>
+
+    <Link to="/" className="back-link">← Back to Home</Link>
+    
+  </div>
+);
+
+}
 export default ViewPost
