@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import API from "../api";
 import {jwtDecode} from "jwt-decode";
+import { toast } from "react-toastify";
 
 function ViewPost() {
   const { id } = useParams();

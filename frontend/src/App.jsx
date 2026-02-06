@@ -18,6 +18,7 @@ function App(){
     <Router>
         <NavBar />
       <div className="main-content">
+        <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
           <Route
     path="/"
@@ -27,6 +28,7 @@ function App(){
       </ProtectedRoute>
     }
   />
+       
         <Route path="/signup" element={<Signup />} /> 
         <Route path ="/login"element ={<Login/>}/>
         <Route path ="/create"element ={<CreatePost/>}/>

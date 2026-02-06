@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function CreatePost() {
   const [title, setTitle] = useState("");
@@ -45,11 +46,11 @@ function CreatePost() {
         },
       });
 
-      alert("Post created successfully!");
+      toast.success("Post created successfully!");
       navigate("/");
     } catch (error) {
       console.log(error);
-      alert(error.response?.data?.message || "Failed to create post");
+      toast.error(error.response?.data?.message || "Failed to create post");
     }
   };
 

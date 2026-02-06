@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import API from "../api";
+import { toast } from "react-toastify";
 
 function EditPost() {
   const { id } = useParams();
@@ -11,6 +12,7 @@ function EditPost() {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [existingImage, setExistingImage] = useState("");
+   const [loading, setLoading] = useState(false);
 
   // Fetch the existing post
   useEffect(() => {
@@ -27,10 +29,10 @@ function EditPost() {
         setExistingImage(
           post.imageUrl?.startsWith("http")
             ? post.imageUrl
-            : `http://localhost:5000/${post.imageUrl}`
+            : `http://localhost:4000/${post.imageUrl}`
         );
       } catch (error) {
-        alert(error.response?.data?.message || "Failed to load post");
+        toast.error(error.response?.data?.message || "Failed to load post");
       }
     };
 
@@ -50,10 +52,15 @@ const handleSubmit = async (e) => {
 
     await API.put(`/posts/${id}`, formData);
 
-    navigate(`/post/${id}`);
+      toast.success("Post updated successfully!");
+
+      setTimeout(() => {
+        navigate(`/post/${id}`);
+      }, 1200)
+
   } catch (error) {
     console.log(error.response?.data);
-    alert(error.response?.data?.message || "Failed to update post");
+    toast.error(error.response?.data?.message || "Failed to update post");
   }
 }
 
@@ -97,7 +104,9 @@ const handleSubmit = async (e) => {
           onChange={(e) => setImage(e.target.files[0])}
         />
 
-        <button type="submit">Update Post</button>
+         <button type="submit" disabled={loading}>
+  {loading ? "Updating..." : "Update Post"}
+</button>
       </form>
     </div>
   );

@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import API from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode"
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 
 function Home() {
@@ -90,6 +89,7 @@ return (
         ))}
       </div>
     )}
+
   </div>
 );
 }

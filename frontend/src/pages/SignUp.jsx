@@ -1,6 +1,7 @@
 import { useState } from "react"
 import API from "../api"
 import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 
 function Signup() {
@@ -19,10 +20,10 @@ function Signup() {
         password,
       });
 
-      alert("Signup successful. Please login.")
+      toast.success("Signup successful. Please login.")
       navigate("/login")
     } catch (error) {
-      alert(
+      toast.error(
         error.response?.data?.message || "Signup failed"
       )
     }

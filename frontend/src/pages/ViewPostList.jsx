@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import API from "../api";
+import { toast } from "react-toastify";
 
 function ViewPostsList() {
   const [posts, setPosts] = useState([]);
@@ -12,7 +13,7 @@ function ViewPostsList() {
         setPosts(res.data);
       } catch (err) {
         console.error(err);
-        alert(err.response?.data?.message || "Failed to fetch posts");
+        toast.error(err.response?.data?.message || "Failed to fetch posts");
       }
     };
     fetchPosts();

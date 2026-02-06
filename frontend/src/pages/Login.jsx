@@ -1,6 +1,7 @@
 import {useState} from "react"
 import API from "../api"
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 
 function Login() {
@@ -15,11 +16,11 @@ function Login() {
             const res = await API.post ("/auth/login", {email,password})
             const token =res.data.token
             localStorage.setItem("token", token)
-             alert("Login successful!")
+             toast.success("Login successful!")
       navigate("/")
         }
         catch (error) {
-      alert(error.response?.data?.message || "Login failed")
+      toast.error(error.response?.data?.message || "Login failed")
     }
     }
   return (
