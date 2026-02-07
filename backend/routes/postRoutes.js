@@ -118,7 +118,7 @@ router.put("/:id", auth, upload.single("image"), async (req, res) => {
 
     // Update image if a new file is uploaded
     if (req.file) {
-      post.imageUrl = req.file.path; // Or Cloudinary URL if using Cloudinary
+      post.imageUrl = req.file.path;
     }
 
     await post.save();
