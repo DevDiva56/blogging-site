@@ -14,7 +14,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://your-frontend.vercel.app"
+        "https://blogging-site-ncnbogl7s-lopuas-projects.vercel.app"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -31,10 +31,15 @@ app.get("/", (req,res)=>{
     res.send("API is running")
 })
 
-mongoose.connect(process.env.MONGO_URI).then(()=>{
-    console.log("MongoDB is connected")
-    app.listen(4000,()=>{
-        console.log("Server running on port 4000")
-    })
-}).catch((error)=>console.log(error))
+const PORT = process.env.PORT || 4000;
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB is connected");
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((error) => console.log(error));
+
 

@@ -16,8 +16,8 @@ import "react-toastify/dist/ReactToastify.css";
 function App(){
 
   return (
+      <BrowserRouter>
      <div className="app-container">
-    <Router>
         <NavBar />
       <div className="main-content">
         <ToastContainer position="top-right" autoClose={3000} />
@@ -39,8 +39,8 @@ function App(){
         <Route path="/edit/:id" element={<EditPost />} />
       </Routes>
       </div>
-    </Router>
     </div>
+    </BrowserRouter>
   )
 }
 
