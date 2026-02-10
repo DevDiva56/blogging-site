@@ -31,7 +31,7 @@ function App(){
     }
   />
        
-        <Route path="/signup" element={<Signup />} /> 
+        <Route path="/signup" element={<SignUp />} />
         <Route path ="/login"element ={<Login/>}/>
         <Route path ="/create"element ={<CreatePost/>}/>
         <Route path="/view" element={<ViewPostsList />} />   
