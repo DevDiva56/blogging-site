@@ -1,13 +1,15 @@
-import{BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import NavBar from "./components/NavBar"
-import Signup from "./pages/Signup"
-import Login from "./pages/Login"
-import Home from "./pages/Home"
-import CreatePost from "./pages/CreatePost"
-import ViewPost from  "./pages/ViewPost"
-import ViewPostsList from "./pages/ViewPostList"
-import EditPost from "./pages/EditPost"
-import ProtectedRoute from "./components/ProtectedRoute"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "./components/NavBar";
+
+import SignUp from "./pages/SignUp.jsx";
+import Login from "./pages/Login.jsx";
+import Home from "./pages/Home.jsx";
+import CreatePost from "./pages/CreatePost.jsx";
+import ViewPost from "./pages/ViewPost.jsx";
+import ViewPostsList from "./pages/ViewPostList.jsx";
+import EditPost from "./pages/EditPost.jsx";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

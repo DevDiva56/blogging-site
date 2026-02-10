@@ -31,15 +31,10 @@ app.get("/", (req,res)=>{
     res.send("API is running")
 })
 
-mongoose
-.connect(process.env.MONGO_URI)
-.then(()=>{
+mongoose.connect(process.env.MONGO_URI).then(()=>{
     console.log("MongoDB is connected")
-
     app.listen(4000,()=>{
         console.log("Server running on port 4000")
     })
-})
-
-.catch((error)=>console.log(error))
+}).catch((error)=>console.log(error))
 
