@@ -12,6 +12,7 @@ function Login() {
 
     const handleSubmit =async(e)=>{
         e.preventDefault()
+        console.log("LOGIN SUBMITTED");
         try{
             const res = await API.post ("/auth/login", {email,password})
             const token =res.data.token

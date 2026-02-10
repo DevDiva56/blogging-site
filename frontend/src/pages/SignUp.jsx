@@ -12,6 +12,8 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    console.log("SIGNUP SUBMITTED");
 
     try {
       await API.post("/auth/signup", {
