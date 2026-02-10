@@ -11,8 +11,8 @@ function Signup() {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
+    // e.preventDefault();
+
     console.log("SIGNUP SUBMITTED");
 
     try {
@@ -31,42 +31,75 @@ function Signup() {
     }
   }
 
+  
   return (
-      <div className="form-container">
-      <h2>Hello, Ready to Experience Archie</h2>
+    <div className="form-container">
+      <h2>Login</h2>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <br /><br />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br /><br />
+      <br /><br />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br /><br />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <button type="submit">Signup</button>
-      </form>
+      <br /><br />
+
+      {/* 👇 THIS IS THE KEY */}
+      <button type="button" onClick={handleLogin}>
+        Login
+      </button>
     </div>
   );
 }
+
+//   // return (
+//       // <div className="form-container">
+//       // <h2>Hello, Ready to Experience Archie</h2>
+
+//       {/* <form onSubmit={handleSubmit}>
+//         <input
+//           type="text"
+//           placeholder="Username"
+//           value={username}
+//           onChange={(e) => setUsername(e.target.value)}
+//           required
+//         />
+//         <br /><br />
+
+//         <input
+//           type="email"
+//           placeholder="Email"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//           required
+//         />
+//         <br /><br />
+
+//         <input
+//           type="password"
+//           placeholder="Password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//           required
+//         />
+//         <br /><br />
+
+//         <button type="submit">Signup</button>
+//       </form>
+//     </div> */}
+
+
+// //   );
+// // }
 
 export default Signup;
