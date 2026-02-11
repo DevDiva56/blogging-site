@@ -21,11 +21,12 @@ app.use(cors({
     
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `CORS policy: Origin ${origin} not allowed`;
-      return callback(new Error(msg), false);
+   if (origin.includes('localhost') || origin.includes('vercel.app')) {
+      return callback(null, true);
     }
-    return callback(null, true);
+
+    const msg = `CORS policy: Origin ${origin} not allowed`;
+    return callback(new Error(msg), false);
   },
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
