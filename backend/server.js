@@ -11,7 +11,8 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://blogging-site-4t43dnt0k-lopuas-projects.vercel.app"
+  "https://blogging-site-4t43dnt0k-lopuas-projects.vercel.app",
+  "https://blogging-site-pklzrfwfm-lopuas-projects.vercel.app"  
 ];
 
 // CORS configuration
@@ -31,10 +32,10 @@ app.use(cors({
   credentials: true
 }));
 
-// Parse JSON bodies
+
 app.use(express.json());
 
-// Routes
+
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 
