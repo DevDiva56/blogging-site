@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 
 
 function Login() {
-
+    
     const[email,setEmail] = useState("")
     const[password,setPassword] = useState("")
     const navigate = useNavigate()
@@ -14,9 +14,8 @@ function Login() {
         e.preventDefault()
         console.log("LOGIN SUBMITTED");
         try{
-            const res = await API.post ("/auth/login", {email,password})
-            const token =res.data.token
-            localStorage.setItem("token", token)
+            const data = await login({ email, password });
+            localStorage.setItem("token", data.token)
              toast.success("Login successful!")
       navigate("/")
         }
