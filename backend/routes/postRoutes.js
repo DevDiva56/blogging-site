@@ -130,38 +130,25 @@ router.put("/:id", auth, upload.single("image"), async (req, res) => {
 })
 
 // Deleting a post
-router.delete("/:id", async (req, res) => {
+
+router.delete("/:id", auth, async (req, res) => {
   try {
     const post = await BlogPost.findById(req.params.id);
-    
+    console.log("Post found:", post);
+    console.log("Logged-in user ID:", req.user.id);
+
     if (!post) return res.status(404).json({ message: "Post not found" });
+    if (post.author.toString() !== req.user.id)
+      return res.status(401).json({ message: "Not authorized" });
 
-    await post.deleteOne();
+    await post.deleteOne()
 
-    res.json({ message: "Post deleted successfully" });
+    res.json({ message: "Post deleted" });
   } catch (error) {
     console.log("DELETE ERROR:", error);
     res.status(500).json({ message: "Failed to delete post" });
   }
-});
-// router.delete("/:id", auth, async (req, res) => {
-//   try {
-//     const post = await BlogPost.findById(req.params.id);
-//     console.log("Post found:", post);
-//     console.log("Logged-in user ID:", req.user.id);
-
-//     if (!post) return res.status(404).json({ message: "Post not found" });
-//     if (post.author.toString() !== req.user.id)
-//       return res.status(401).json({ message: "Not authorized" });
-
-//     await post.deleteOne()
-
-//     res.json({ message: "Post deleted" });
-//   } catch (error) {
-//     console.log("DELETE ERROR:", error);
-//     res.status(500).json({ message: "Failed to delete post" });
-//   }
-// })
+})
 
 
 
